@@ -188,6 +188,18 @@ class Version implements Comparable<Version> {
         build: build, preRelease: preReleaseList);
   }
 
+  /// Creates a nullable [Version] instance from a string.
+  ///
+  /// The string must conform to the specification at http://semver.org/
+  /// Returns null if the string is empty or null
+  /// Throws [FormatException] if the string does not conform to the spec.
+  static Version? parseNullable(String? versionString) {
+    if (versionString == null || versionString.isEmpty) {
+      return null;
+    }
+    return parse(versionString);
+  }
+
   static int _compare(Version? a, Version? b) {
     if (a == null) {
       throw ArgumentError.notNull("a");
